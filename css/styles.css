@@ -21,6 +21,7 @@ body {
 
 #main ul {
     padding-left: 20px;
+    list-style: none;
 }
 
 #main .error {
