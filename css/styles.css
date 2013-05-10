@@ -39,3 +39,6 @@ body {
     color: green;
     line-height: 13px;
 }
+.bold{
+    font-weight: bold;
+}
