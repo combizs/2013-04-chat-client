@@ -13,7 +13,7 @@ $(document).ready(function() {
       contentType: 'application/json',
       data: {"where": '{"username": "'+userName+'"}', order: "-createdAt"},
       success: function (data) {
-        friends = data.results[0].friendlist;
+        friends = data.results[0].friendlist ? data.results[0].friendlist : {};
         console.log(friends);
       }
     });
@@ -25,7 +25,8 @@ $(document).ready(function() {
     jqXHR.setRequestHeader("X-Parse-REST-API-Key", "QC2F43aSAghM97XidJw8Qiy1NXlpL5LR45rhAVAf");
   });
 
-  var friends = getFriends();
+  var friends = {};
+  getFriends();
 
   var ajaxQuery = function() {
     var roomName = $('#room').val();

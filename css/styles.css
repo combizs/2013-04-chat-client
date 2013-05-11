@@ -42,3 +42,14 @@ body {
 .bold{
     font-weight: bold;
 }
+input {
+    border-radius:7px;
+    border: 2px solid lightgray;
+    padding: 5px;
+    margin: 5px;
+}
+
+button {
+    border-radius: 5px;
+    padding: 5px 15px;
+}
