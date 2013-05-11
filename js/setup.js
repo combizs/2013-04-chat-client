@@ -8,12 +8,12 @@ if(!/(&|\?)username=/.test(window.location.search)){
 }
 $(document).ready(function() {
   var getFriends = function (){
-    $.ajax('https://api.parse.com/1/classes/users', {
+    $.ajax('https://api.parse.com/1/classes/friends', {
       type: 'GET',
       contentType: 'application/json',
       data: {"where": '{"username": "'+userName+'"}', order: "-createdAt"},
       success: function (data) {
-        friends = data.friendlist ? data.friendlist : {};
+        friends = data.results[0].friendlist;
         console.log(friends);
       }
     });
@@ -24,8 +24,9 @@ $(document).ready(function() {
     jqXHR.setRequestHeader("X-Parse-Application-Id", "voLazbq9nXuZuos9hsmprUz7JwM2N0asnPnUcI7r");
     jqXHR.setRequestHeader("X-Parse-REST-API-Key", "QC2F43aSAghM97XidJw8Qiy1NXlpL5LR45rhAVAf");
   });
-  var friends = {};
-  getFriends();
+
+  var friends = getFriends();
+
   var ajaxQuery = function() {
     var roomName = $('#room').val();
     $.ajax('https://api.parse.com/1/classes/messages', {
@@ -49,8 +50,8 @@ $(document).ready(function() {
             else {
               friends[newFriend] = false;
             }
-            makeFriendsObj();
             console.log(friends);
+            makeFriendsObj(friends);
           });
           if(friends[item.username]) {
             $message.addClass("bold");
@@ -67,10 +68,10 @@ $(document).ready(function() {
 
   ajaxQuery();
 
-  var makeFriendsObj = function(){
+  var makeFriendsObj = function(newlist){
     var friendList = {
       'username': userName,
-      'friendlist': friends
+      'friendlist': newlist
     };
     $.ajax('https://api.parse.com/1/classes/friends', {
       type: 'POST',
