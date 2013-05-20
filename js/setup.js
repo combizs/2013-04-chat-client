@@ -111,7 +111,8 @@ $(document).ready(function() {
   $('#userText').on("keyup", function(e) {
     if(e.keyCode !== 13){
       return;
-    } else {
+    }
+    else {
       submit();
     }
   });
